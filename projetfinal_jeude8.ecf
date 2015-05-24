@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<system xmlns="http://www.eiffel.com/developers/xml/configuration-1-13-0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.eiffel.com/developers/xml/configuration-1-13-0 http://www.eiffel.com/developers/xml/configuration-1-13-0.xsd" name="projetfinal_jeude8" uuid="BC0CFB84-1B2A-4B4E-A3F8-10593AC113B1">
+	<target name="projetfinal_jeude8">
+		<root class="APPLICATION" feature="make"/>
+		<option warning="true" void_safety="none">
+			<assertions precondition="true" postcondition="true" check="true" invariant="true" loop="true" supplier_precondition="true"/>
+		</option>
+		<setting name="console_application" value="true"/>
+		<setting name="concurrency" value="thread"/>
+		<precompile name="base_pre" location="$ISE_PRECOMP\base-mt.ecf"/>
+		<library name="audio_lib" location="iron:game:audio_lib\audio_lib.ecf"/>
+		<library name="audio_snd_files_lib" location="iron:game:audio_snd_files_lib\audio_snd_files_lib.ecf"/>
+		<library name="base" location="$ISE_LIBRARY\library\base\base.ecf"/>
+		<library name="eiffel_game_lib" location="iron:game:game_core_lib\game_core_lib.ecf"/>
+		<library name="game_images_files_lib" location="iron:game:game_images_files_lib\game_images_files_lib.ecf"/>
+		<library name="game_text_lib" location="iron:game:game_text_lib\game_text_lib.ecf"/>
+		<library name="gobo_regexp" location="$ISE_LIBRARY\library\gobo\gobo_regexp.ecf"/>
+		<library name="net" location="iron:net:net.ecf"/>
+		<library name="thread" location="iron:thread:thread.ecf"/>
+		<cluster name="projetfinal_jeude8" location=".\" recursive="true">
+			<file_rule>
+				<exclude>/EIFGENs$</exclude>
+				<exclude>/CVS$</exclude>
+				<exclude>/.svn$</exclude>
+			</file_rule>
+		</cluster>
+	</target>
+</system>
