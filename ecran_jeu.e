@@ -22,10 +22,10 @@ feature {NONE} -- Initialization
 			create joueurs.make (1)
 			joueurs.extend (l_joueur)
 			if engin_jeu.engin_reseau.est_serveur then
-				create un_paquet_carte.make (engin_jeu.controlleur_jeu)
-				engin_jeu.engin_reseau.envoyer_paquet_carte (un_paquet_carte.numeros_cartes_a_creer)
+				create les_paquets_carte.make (engin_jeu.controlleur_jeu)
+				engin_jeu.engin_reseau.envoyer_paquet_carte (les_paquets_carte.numeros_cartes_a_creer)
 			else
-				create un_paquet_carte.make_avec_liste (engin_jeu.engin_reseau.recevoir_paquet_carte)
+				create les_paquets_carte.make_avec_liste (engin_jeu.engin_reseau.recevoir_paquet_carte)
 			end
 		end
 
@@ -36,7 +36,7 @@ feature {NONE} -- Attribut local
 
 feature -- Attributs
 
-	un_paquet_carte: PAQUET_CARTE
+	les_paquets_carte: PAQUET_CARTE
 			-- un paquet de carte.
 
 	joueurs: ARRAYED_LIST [JOUEUR]
@@ -49,10 +49,11 @@ feature -- Operations
 		local
 			l_joueur: JOUEUR
 		do
+			engin_jeu.controlleur_jeu.clear_event_controller
 			create l_joueur.make
 			joueurs.extend (l_joueur)
-			un_paquet_carte.placer_carte_centre (engin_jeu.controlleur_jeu)
-			un_paquet_carte.donner_carte_debut (joueurs)
+			les_paquets_carte.placer_carte_centre (engin_jeu.controlleur_jeu)
+			les_paquets_carte.donner_carte_debut (joueurs)
 			engin_jeu.fenetre_principale.set_image_affichee_plateau
 			engin_jeu.fenetre_principale.afficher_fenetre_jeu (engin_jeu.controlleur_jeu)
 			engin_jeu.engin_sonore.set_sound (engin_jeu.controlleur_jeu)
@@ -67,6 +68,7 @@ feature -- Operations
 		do
 			engin_jeu.fenetre_principale.plateau_de_jeu.afficher_carte_joueur_principal (engin_jeu.controlleur_jeu, joueurs.first)
 			engin_jeu.fenetre_principale.plateau_de_jeu.afficher_carte_autre_joueur (engin_jeu.controlleur_jeu, joueurs)
+			engin_jeu.fenetre_principale.plateau_de_jeu.afficher_carte_centre (engin_jeu.controlleur_jeu, les_paquets_carte.paquet_carte_jouee.last.image)
 			engin_jeu.engin_sonore.mise_a_jour
 		end
 

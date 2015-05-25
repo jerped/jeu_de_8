@@ -18,15 +18,19 @@ feature {NONE} -- Initialization
 			create liste_boutons.make (3)
 			liste_boutons.extend (1)
 			liste_boutons.extend (2)
+			create font_normal.make (".\ressources\arial.ttf", 18)
+			create font_gros.make (".\ressources\arial.ttf", 30)
 		end
+
+feature -- Attribut
+
+	doit_demarrer_jeu:BOOLEAN
+			-- si le jeu doit démarrer
 
 feature {NONE} -- Attribut local
 
 	engin_jeu: ENGIN_DE_JEU
 			-- l'{ENGIN_DE_JEU} qui gère les event et autres.
-
-	doit_commencer: BOOLEAN
-			-- si le jeu doit commencer
 
 	doit_rejoindre: BOOLEAN
 			-- si l'option de l'Adresse IP doit apparaître
@@ -36,6 +40,12 @@ feature {NONE} -- Attribut local
 
 	liste_boutons: ARRAYED_LIST [INTEGER]
 			-- une liste pour pouvoir changer de boutons
+
+	font_normal: GAME_FONT
+			-- la police pour les textes de taille normale
+
+	font_gros: GAME_FONT
+			-- La police pour les textes de grande taille
 
 feature -- Operations
 
@@ -88,6 +98,7 @@ feature -- Operations
 			engin_jeu.engin_reseau.creer_client (engin_jeu.adresse_ip)
 			engin_jeu.controlleur_jeu.clear_event_controller
 			engin_jeu.controlleur_jeu.stop
+			doit_demarrer_jeu := True
 		end
 
 	attendre_connexion
@@ -104,7 +115,7 @@ feature -- Operations
 			engin_jeu.engin_reseau.creer_serveur
 			engin_jeu.engin_reseau.launch
 			engin_jeu.controlleur_jeu.clear_event_controller
-			engin_jeu.controlleur_jeu.event_controller.on_iteration.extend (agent engin_jeu.on_quit)
+			engin_jeu.controlleur_jeu.event_controller.on_quit_signal.extend (agent engin_jeu.on_quit)
 			engin_jeu.controlleur_jeu.event_controller.on_iteration.extend (agent surveiller_connexion)
 			engin_jeu.controlleur_jeu.launch
 			engin_jeu.engin_reseau.join
@@ -117,6 +128,7 @@ feature -- Operations
 				engin_jeu.engin_reseau.yield
 				engin_jeu.controlleur_jeu.clear_event_controller
 				engin_jeu.controlleur_jeu.stop
+				doit_demarrer_jeu := True
 			end
 		end
 
@@ -171,8 +183,6 @@ feature -- Operations
 			l_zone_texte_multiplayer: GAME_SURFACE_TEXT
 			l_zone_texte_ip: GAME_SURFACE_TEXT
 			l_zone_texte_attente: GAME_SURFACE_TEXT
-			l_font_normal: GAME_FONT
-			l_font_gros: GAME_FONT
 		do
 				-- Création des couleurs du texte.
 			create l_couleur_texte_titre.make_rgb (255, 255, 255)
@@ -196,8 +206,6 @@ feature -- Operations
 				l_couleur_texte_ip.red := 200
 				l_couleur_texte_ip.green := 0
 			end
-			create l_font_normal.make (".\ressources\arial.ttf", 18)
-			create l_font_gros.make (".\ressources\arial.ttf", 30)
 			l_texte_attente := "Attente de la connexion de l'opposant"
 			l_texte_titre := "Jeu de 8 en 1 vs 1"
 			l_texte_multiplayer := "Rejoindre un opposant"
@@ -205,11 +213,11 @@ feature -- Operations
 			l_texte_adresse_ip := "Adresse IP de l'opposant: "
 			l_texte_adresse_ip.append (engin_jeu.adresse_ip)
 			engin_jeu.fenetre_principale.afficher_fenetre_jeu (engin_jeu.controlleur_jeu)
-			create l_zone_texte_titre.make_blended (l_texte_titre, l_font_gros, l_couleur_texte_titre)
-			create l_zone_texte_start.make_blended (l_texte_start, l_font_normal, l_couleur_texte_start)
-			create l_zone_texte_ip.make_blended (l_texte_adresse_ip, l_font_normal, l_couleur_texte_ip)
-			create l_zone_texte_multiplayer.make_blended (l_texte_multiplayer, l_font_normal, l_couleur_texte_multiplayer)
-			create l_zone_texte_attente.make_blended (l_texte_attente, l_font_gros, l_couleur_texte_attente)
+			create l_zone_texte_titre.make_blended (l_texte_titre, font_gros, l_couleur_texte_titre)
+			create l_zone_texte_start.make_blended (l_texte_start, font_normal, l_couleur_texte_start)
+			create l_zone_texte_ip.make_blended (l_texte_adresse_ip, font_normal, l_couleur_texte_ip)
+			create l_zone_texte_multiplayer.make_blended (l_texte_multiplayer, font_normal, l_couleur_texte_multiplayer)
+			create l_zone_texte_attente.make_blended (l_texte_attente, font_gros, l_couleur_texte_attente)
 			engin_jeu.controlleur_jeu.screen_surface.draw_surface (l_zone_texte_multiplayer, 125, 200)
 			engin_jeu.controlleur_jeu.screen_surface.draw_surface (l_zone_texte_start, 125, 150)
 			engin_jeu.controlleur_jeu.screen_surface.draw_surface (l_zone_texte_titre, 300, 100)

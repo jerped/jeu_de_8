@@ -1,21 +1,24 @@
 note
-	description : "Le Joker du paquet"
-	author      : "Jérémi Pedneault"
-	date        : "12-02-2015"
+	description: "Le Joker du paquet"
+	author: "Jérémi Pedneault"
+	date: "12-02-2015"
 
 class
 	JOKER
 
-inherit CARTE
-	redefine
-		make
-	end
+inherit
+
+	CARTE
+		redefine
+			make
+		end
 
 create
 	make
 
-feature {NONE}-- Initialization
-	make(a_numero:INTEGER)
+feature {NONE} -- Initialization
+
+	make (a_numero: INTEGER)
 			-- Initialization for `Current'.
 			-- Assigne le `numero' de la carte ainsi que son `image'
 		do
@@ -24,11 +27,11 @@ feature {NONE}-- Initialization
 		end
 
 feature -- Operations
-	effet
-		-- Fais piger 5 cartes au prochain joueur
-		-- Permet aussi de décider de la sorte suivante.
-		do
 
+	effet
+			-- Fais piger 5 cartes au prochain joueur
+			-- Permet aussi de décider de la sorte suivante.
+		do
 		end
 
 end

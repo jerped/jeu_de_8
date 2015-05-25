@@ -1,7 +1,7 @@
 note
-	description : "Classe abstraite CARTE"
-	author      : "Jérémi Pedneault"
-	date        : "12-02-2015"
+	description: "Classe abstraite CARTE"
+	author: "Jérémi Pedneault"
+	date: "12-02-2015"
 
 class
 	JOUEUR
@@ -9,7 +9,8 @@ class
 create
 	make
 
-feature {NONE}-- Initialization
+feature {NONE} -- Initialization
+
 	make
 			-- Initialization for `Current'.
 		do
@@ -17,7 +18,8 @@ feature {NONE}-- Initialization
 		end
 
 feature -- Attributs
-	carte_possedees:ARRAYED_LIST [CARTE]
-		-- Liste des cartes pour le {JOUEUR}.
+
+	carte_possedees: ARRAYED_LIST [CARTE]
+			-- Liste des cartes pour le {JOUEUR}.
 
 end

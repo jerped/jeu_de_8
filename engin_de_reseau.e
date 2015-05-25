@@ -28,6 +28,9 @@ feature {NONE} -- Initialization
 
 feature {NONE} -- Attributs locaux
 
+	port: INTEGER = 25565
+			-- port de connexion entre le serveur et le client
+
 	serveur_socket: NETWORK_STREAM_SOCKET
 			-- {SOCKET} du serveur pour l'application serveur
 
@@ -50,7 +53,7 @@ feature -- Operations
 	creer_serveur
 			-- crée le `serveur_socket' du serveur
 		do
-			create serveur_socket.make_server_by_port (25565)
+			create serveur_socket.make_server_by_port (port)
 		end
 
 	execute
@@ -80,7 +83,7 @@ feature -- Operations
 		do
 			create l_factory_adresse
 			l_adresse := l_factory_adresse.create_from_name (une_adresse_ip)
-			create client_socket.make_client_by_address_and_port (l_adresse, 25565)
+			create client_socket.make_client_by_address_and_port (l_adresse, port)
 			client_socket.connect
 			if client_socket.is_connected then
 				est_connecte := True
@@ -112,7 +115,7 @@ feature -- Operations
 			from
 				une_liste_id_carte.start
 			until
-				une_liste_id_carte.islast
+				une_liste_id_carte.after
 			loop
 				serveur_client_socket.put_integer (une_liste_id_carte.item)
 				une_liste_id_carte.forth

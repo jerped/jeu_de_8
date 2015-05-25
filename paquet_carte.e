@@ -13,7 +13,7 @@ create
 feature {NONE} -- Initialization
 	make (a_controlleur_jeu: GAME_LIB_CONTROLLER)
 			-- Initialization for `Current'.
-			-- Créeaussi les paquets de cartes du jeu
+			-- Crée aussi les paquets de cartes du jeu
 		do
 			creer_ordre_carte (a_controlleur_jeu)
 			creer_cartes
