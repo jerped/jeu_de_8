@@ -1,5 +1,5 @@
 note
-	description: "Classe abstraite CARTE"
+	description: "Classe du Joueur"
 	author: "Jérémi Pedneault"
 	date: "12-02-2015"
 

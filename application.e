@@ -22,10 +22,10 @@ feature {NONE} -- Initialization
 			l_engin_de_jeu: ENGIN_DE_JEU
 		do
 			create l_engin_de_jeu.make
-			create l_ecran_titre.make (l_engin_de_jeu)
+			create l_ecran_titre.make (l_engin_de_jeu)    	-- Démarrage de l'écran titre
 			l_ecran_titre.run_ecran_titre
 			if l_ecran_titre.doit_demarrer_jeu then
-				create l_ecran_jeu.make (l_engin_de_jeu)
+				create l_ecran_jeu.make (l_engin_de_jeu)	-- Démarrage du jeu, si demandé dans l'écran titre
 				l_ecran_jeu.run_game
 			end
 			l_engin_de_jeu.controlleur_image.quit_library

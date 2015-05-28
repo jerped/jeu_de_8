@@ -16,14 +16,16 @@
 		<library name="game_text_lib" location="iron:game:game_text_lib\game_text_lib.ecf"/>
 		<library name="gobo_regexp" location="$ISE_LIBRARY\library\gobo\gobo_regexp.ecf"/>
 		<library name="net" location="iron:net:net.ecf"/>
+		<library name="testing" location="$ISE_LIBRARY\library\testing\testing.ecf"/>
 		<library name="thread" location="iron:thread:thread.ecf"/>
 		<cluster name="projetfinal_jeude8" location=".\" recursive="true">
 			<file_rule>
+				<exclude>/.git$</exclude>
 				<exclude>/EIFGENs$</exclude>
 				<exclude>/CVS$</exclude>
 				<exclude>/.svn$</exclude>
-				<exclude>/.git$</exclude>
 			</file_rule>
+			<tests name="tests" location="C:\Users\Jeremi\Documents\Eiffel User Files\14.05\projects\ProjetFinal_JeuDe8\tests\"/>
 		</cluster>
 	</target>
 </system>

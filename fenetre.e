@@ -1,5 +1,5 @@
 note
-	description: "Classe abstraite CARTE"
+	description: "Classe pour la fenêtre du jeu"
 	author: "Jérémi Pedneault"
 	date: "12-02-2015"
 
@@ -14,9 +14,11 @@ feature {NONE} -- Initialization
 	make_fenetre_principale (a_controller: GAME_LIB_CONTROLLER)
 			-- Initialization for `Current'.
 		do
-			a_controller.create_screen_surface (850, 850, 16, true, true, false, true, false)
-			a_controller.set_window_caption ("8 de Cartes", "8")
-			create plateau_de_jeu.make
+			if a_controller /= Void then
+				a_controller.create_screen_surface (850, 850, 16, true, true, false, true, false)
+				a_controller.set_window_caption ("8 de Cartes", "8")
+				create plateau_de_jeu.make
+			end
 		end
 
 feature -- Attributs
@@ -24,7 +26,7 @@ feature -- Attributs
 	plateau_de_jeu: PLATEAU
 			-- le plateau du jeu
 
-	image_affichee: GAME_SURFACE_IMG_FILE
+	image_affichee: GAME_SURFACE
 			-- l'image à afficher sur la fenêtre de jeu
 
 feature -- Operations
@@ -32,7 +34,7 @@ feature -- Operations
 	set_image_affichee_avec_lien (a_lien_image: STRING)
 			-- Construit l'image à afficher à partir d'un chemin de fichier
 		do
-			create image_affichee.make (a_lien_image)
+			image_affichee:= create {GAME_SURFACE_IMG_FILE}.make (a_lien_image)
 		end
 
 	set_image_affichee_plateau

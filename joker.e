@@ -23,12 +23,14 @@ feature {NONE} -- Initialization
 			-- Assigne le `numero' de la carte ainsi que son `image'
 		do
 			numero := a_numero
-			create image.make ("./ressources/images/cartes/carte" + (a_numero).out + ".png")
+			image := create {GAME_SURFACE_IMG_FILE}.make_with_alpha("./ressources/images/cartes/carte" + (a_numero).out + ".png")
+			valeur := 0
+			sorte := "joker"
 		end
 
 feature -- Operations
 
-	effet
+	effet(un_engin_jeu:ENGIN_DE_JEU)
 			-- Fais piger 5 cartes au prochain joueur
 			-- Permet aussi de décider de la sorte suivante.
 		do

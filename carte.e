@@ -11,6 +11,9 @@ feature {NONE} -- Initialization
 	make (a_numero: INTEGER)
 			-- Initialization for `Current'.
 			-- Assignation de `numero'
+		require
+			numero_trop_grand: a_numero <= 54
+			numero_trop_petit: a_numero >= 0
 		do
 			numero := a_numero
 			attribuer_variable
@@ -27,7 +30,7 @@ feature -- Attributs
 	sorte: STRING
 			-- sorte de la carte. "Carré", "Trèfle", "Coeur", "Pique"
 
-	image: GAME_SURFACE_IMG_FILE
+	image: GAME_SURFACE
 			-- image représentant la carte
 
 feature -- Operations
@@ -36,7 +39,7 @@ feature -- Operations
 			-- création des cartes selon leur `numero'. Attribut la sorte et l'image de celles-ci
 		do
 			valeur := ((numero - 3) \\ 13) + 1
-			create image.make ("./ressources/images/cartes/carte" + (numero).out + ".png")
+			image := create {GAME_SURFACE_IMG_FILE}.make_with_alpha ("./ressources/images/cartes/carte" + (numero).out + ".png")
 			if ((numero - 3) / 13).floor = 0 then
 				sorte := "Coeur"
 			elseif ((numero - 3) / 13).floor = 1 then
@@ -46,9 +49,11 @@ feature -- Operations
 			elseif ((numero - 3) / 13).floor = 3 then
 				sorte := "Trèfle"
 			end
+		ensure
+			valeur_non_valide: valeur <= 13 or valeur >= 1
 		end
 
-	effet
+	effet(un_engin_jeu:ENGIN_DE_JEU)
 			-- L'effet des cartes, changé selon le type de celle-ci. Ne fais rien pour les cartes de bases.
 		deferred
 		end

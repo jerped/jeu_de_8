@@ -15,7 +15,7 @@ create
 
 feature -- Operations
 
-	effet
+	effet(un_engin_jeu:ENGIN_DE_JEU)
 			-- Permet de changer le sens du jeu. Ne change pas grand chose dans une partie 1v1
 		do
 		end

@@ -15,7 +15,7 @@ create
 
 feature -- Operations
 
-	effet
+	effet(un_engin_jeu:ENGIN_DE_JEU)
 			-- Permet de décider la sorte de carte à jouer.
 		do
 		end

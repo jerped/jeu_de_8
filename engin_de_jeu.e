@@ -1,5 +1,5 @@
 note
-	description: "Classe abstraite CARTE"
+	description: "Classe qui possède tous les controlleurs du jeu"
 	author: "Jérémi Pedneault"
 	date: "12-02-2015"
 
@@ -51,6 +51,7 @@ feature -- Attributs
 feature -- Operations
 
 	on_quit
+			-- Arrête la boucle infinie du controlleur de jeu
 		do
 			controlleur_jeu.stop
 		end
